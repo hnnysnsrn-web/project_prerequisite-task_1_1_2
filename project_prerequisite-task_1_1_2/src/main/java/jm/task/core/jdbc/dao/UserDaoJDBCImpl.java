@@ -1,7 +1,12 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
@@ -24,9 +29,9 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        String sql = "DROP TABLE users";
+        String sql = "DROP TABLE IF EXISTS users";
 
-        try (Connection connection = Util.getConnectio();
+        try (Connection connection = Util.getConnection();
             Statement stat = connection.createStatement()) {
             stat.executeUpdate(sql);
         } catch(SQLException e) {
@@ -53,8 +58,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Connection connection = Util.getConnection();
             PreparedStatement preparedstat = connection.prepareStatement(sql)) {
-            preparedStat.setLong(1, id);
-            preparedStat.executeUpdate();
+            preparedstat.setLong(1, id);
+            preparedstat.executeUpdate();
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }
@@ -68,7 +73,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "TRUNCATE TABLE users";
 
         try (Connection connection = Util.getConnection();
-            Statement stat = connection.createStatement()) {
+             Statement stat = connection.createStatement()) {
             stat.executeUpdate(sql);
         } catch(SQLException e) {
             throw new RuntimeException(e);

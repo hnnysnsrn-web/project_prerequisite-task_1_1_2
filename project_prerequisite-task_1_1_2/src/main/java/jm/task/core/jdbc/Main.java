@@ -12,19 +12,19 @@ public class Main {
 
         userService.createUsersTable();
 
-        userService.saveUser("Frank", "Anne", 18);
-        userService.saveUser("Bob", "Builder", 32);
-        userService.saveUser("Jacob", "Daniel", 31);
-        userService.saveUser("Jesse", "Smith", 53);
+        userService.saveUser("Frank", "Anne", (byte)18);
+        userService.saveUser("Bob", "Builder", (byte)32);
+        userService.saveUser("Jacob", "Daniel", (byte)31);
+        userService.saveUser("Jesse", "Smith", (byte)53);
 
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getAllUsers();
         for(User user : users) {
             System.out.println(user);
         }
 
         userService.cleanUsersTable();
 
-        userService.dropUserTable();
+        userService.dropUsersTable();
 
     }
 }
