@@ -15,8 +15,9 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() {
-        String sql = "CREATE TABLE users(" +
+        String sql = "CREATE TABLE IF NOT EXiSTS users(" +
                      "id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
+                     "name VARCHAR(30), " +
                      "lastName VARCHAR(100) NOT NULL, " +
                      "age TINYINT)";
 
@@ -66,7 +67,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public List<User> getAllUsers() {
-        return null;
+        return getAllUsers();
     }
 
     public void cleanUsersTable() {
