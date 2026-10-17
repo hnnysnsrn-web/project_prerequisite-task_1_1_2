@@ -13,9 +13,13 @@ public class Main {
         userService.createUsersTable();
 
         userService.saveUser("Frank", "Anne", (byte)18);
+        System.out.println("Successfully saved Frank Anne user");
         userService.saveUser("Bob", "Builder", (byte)32);
+        System.out.println("Successfully saved Bob Builder user");
         userService.saveUser("Jacob", "Daniel", (byte)31);
+        System.out.println("Successfully saved Jacob Daniel user");
         userService.saveUser("Jesse", "Smith", (byte)53);
+        System.out.println("Successfully saved Jesse Smith user");
 
         List<User> users = userService.getAllUsers();
         for(User user : users) {
