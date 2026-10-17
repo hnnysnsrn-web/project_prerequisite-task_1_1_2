@@ -23,7 +23,7 @@ public class UserDaoJDBCImpl implements UserDao {
             Statement stat = connection.createStatement()) {
             stat.executeUpdate(sql);
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to create users table.", e);
         }
     }
 
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
             Statement stat = connection.createStatement()) {
             stat.executeUpdate(sql);
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to drop users table.", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedstat.setByte(3, age);
             preparedstat.executeUpdate();
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to save users.", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedstat.setLong(1, id);
             preparedstat.executeUpdate();
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to remove user by ID", e);
         }
     }
 
@@ -82,7 +82,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to retrieve users.", e);
         }
         return  users;
     }
@@ -94,7 +94,7 @@ public class UserDaoJDBCImpl implements UserDao {
              Statement stat = connection.createStatement()) {
             stat.executeUpdate(sql);
         } catch(SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to clean users table.", e);
         }
     }
 }
