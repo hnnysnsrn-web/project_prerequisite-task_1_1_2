@@ -8,7 +8,7 @@ public class Util {
     // set up a database connection
     private static final String URL = "jdbc:mysql://localhost:3306/DBI_db";
     private static final String USER = "root";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = ("DB_PASSWORD");
 
     public static Connection getConnection() {
         try {
