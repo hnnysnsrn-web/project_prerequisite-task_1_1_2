@@ -18,10 +18,10 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void createUsersTable() {
         executeSql("CREATE TABLE IF NOT EXISTS users(" +
-                "id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
-                "name VARCHAR(30), " +
+                "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+                "name VARCHAR(30) NOT NULL, " +
                 "lastName VARCHAR(100) NOT NULL, " +
-                "age TINYINT)");
+                "age TINYINT NOT NULL)");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
             if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
-            throw new RuntimeException("Failed to save user");
+            throw new RuntimeException("Failed to save user", e);
         }
     }
 
@@ -63,7 +63,7 @@ public class UserDaoHibernateImpl implements UserDao {
             if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
-            throw new RuntimeException("Failed to delete user");
+            throw new RuntimeException("Failed to delete user", e);
         }
     }
 
@@ -80,10 +80,17 @@ public class UserDaoHibernateImpl implements UserDao {
         executeSql("DELETE FROM users");
     }
     private void executeSql(String sql) {
+        Transaction tx = null;
+
         try (Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.createSQLQuery(sql).executeUpdate();
             tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException("Failed to execute sql", e);
         }
     }
 

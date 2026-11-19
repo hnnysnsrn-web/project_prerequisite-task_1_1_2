@@ -16,7 +16,7 @@ public class User {
     @Column(nullable = false, length = 100)
     private String lastName;
 
-    @Column(nullable = false, precision = 100)
+    @Column(nullable = false)
     private Byte age;
 
     // Required by Hibernate
